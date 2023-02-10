@@ -34,7 +34,7 @@ public class CakeView extends SurfaceView {
     public static final float outerFlameRadius = 30.0f;
     public static final float innerFlameRadius = 15.0f;
 
-
+    private CakeModel cakeModel;
 
     /**
      * ctor must be overridden here as per standard Java inheritance practice.  We need it
@@ -42,6 +42,8 @@ public class CakeView extends SurfaceView {
      */
     public CakeView(Context context, AttributeSet attrs) {
         super(context, attrs);
+
+        cakeModel = new CakeModel();
 
         //This is essential or your onDraw method won't get called
         setWillNotDraw(false);
@@ -125,6 +127,10 @@ public class CakeView extends SurfaceView {
         drawCandle(canvas, cakeLeft + 2*cakeWidth/3 - candleWidth/2, cakeTop);
 
     }//onDraw
+
+    public CakeModel getCakeModel() {
+        return cakeModel;
+    }//getCakeModel
 
 }//class CakeView
 
