@@ -24,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
 
         CompoundButton candleSwitch = findViewById(R.id.switch2);
         candleSwitch.setOnCheckedChangeListener(CakeObj);
+
+
     }
 
     public void goodbye(View button) {
