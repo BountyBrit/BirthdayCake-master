@@ -9,6 +9,7 @@ import android.view.SurfaceView;
 
 public class CakeView extends SurfaceView {
 
+
     /* These are the paints we'll use to draw the birthday cake below */
     Paint cakePaint = new Paint();
     Paint frostingPaint = new Paint();
@@ -16,6 +17,7 @@ public class CakeView extends SurfaceView {
     Paint outerFlamePaint = new Paint();
     Paint innerFlamePaint = new Paint();
     Paint wickPaint = new Paint();
+    Paint balloonPaint = new Paint();
 
     /* These constants define the dimensions of the cake.  While defining constants for things
         like this is good practice, we could be calculating these better by detecting
@@ -35,6 +37,13 @@ public class CakeView extends SurfaceView {
     public static final float innerFlameRadius = 15.0f;
 
     private CakeModel cakeModel;
+
+    public static final float balloonW = 100.0f;
+    public static final float balloonH = 130.0f;
+    public static final float stringW = 5.0f;
+
+
+
 
     /**
      * ctor must be overridden here as per standard Java inheritance practice.  We need it
@@ -65,6 +74,9 @@ public class CakeView extends SurfaceView {
 
         setBackgroundColor(Color.WHITE);  //better than black default
 
+        balloonPaint.setColor(Color.BLUE); //blue
+        balloonPaint.setStyle(Paint.Style.FILL);
+
     }
 
     /**
@@ -90,6 +102,12 @@ public class CakeView extends SurfaceView {
         float wickTop = bottom - wickHeight - candleHeight;
         canvas.drawRect(wickLeft, wickTop, wickLeft + wickWidth, wickTop + wickHeight, wickPaint);
 
+    }
+
+    public void drawBalloon(Canvas canvas, float initx, float inity)
+    {
+        canvas.drawOval(initx -balloonW/2, inity - balloonH/2, initx + balloonW/2, inity + balloonH/2, balloonPaint);
+        canvas.drawRect(initx - stringW/2, inity - stringW/2, initx + stringW/2, inity + 2 * balloonH, balloonPaint);
     }
 
     /**
@@ -130,11 +148,16 @@ public class CakeView extends SurfaceView {
                 drawCandle(canvas, cakeLeft + ((i*cakeWidth)/(cakeModel.numCandles+1)) - (candleWidth/2), cakeTop);
             }
         }
+
+        if(cakeModel.x > 0)
+        {
+            this.drawBalloon(canvas, cakeModel.x, cakeModel.y);
+        }
+
     }//onDraw
 
     public CakeModel getCakeModel() {
         return cakeModel;
     }//getCakeModel
-
 }//class CakeView
 
